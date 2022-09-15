@@ -4,7 +4,7 @@ logPath=/var/log
 
 target_logs=`find ${logpath} -name "*.log" -mtime +7`
 disk_usage=$(df -h|grep "/$"|awk '{print int($5)}')
-if [ $disk_usage -gt 80 ]; then
+if [ $disk_usage -gt 20 ]; then
         curTime=$(date '+%Y-%m-%d %H:%M:%S')
         startString="--------------------${curTime} daily log cleaning work started!------------------------------"
         echo $startString >> ${logPath}/shell.txt
