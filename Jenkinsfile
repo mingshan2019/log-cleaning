@@ -20,7 +20,6 @@ pipeline {
                 echo 'Configuring the timming service on the targeted server ...'
                 sshagent(credentials: ['logclean']) {
                 sh 'ssh -o StrictHostKeyChecking=no ubuntu@52.62.246.235 crontab ./logcleaning/crontab.config'
-                sh 'scp crontab ubuntu@52.62.246.235:/tmp/crontab.isn8ic'
                 }
             }
         }  
