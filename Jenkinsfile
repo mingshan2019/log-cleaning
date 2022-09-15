@@ -7,13 +7,10 @@ pipeline {
         
         stage('Upload') {
             steps {
-                echo 'Uploading shell script to the targeted server ... '
-                sh 'pwd'
-                sh 'ls -la'
+                echo 'Uploading the shell script and the conrontab configure file to the targeted folder ... '
                 sshagent(credentials: ['logclean']) {
-                sh 'ssh -o StrictHostKeyChecking=no ubuntu@52.62.246.235 mkdir logcleaning'
                 sh 'ssh -v ubuntu@52.62.246.235'
-                sh 'scp log-cleaning.shell ubuntu@52.62.246.235:/home/ubuntu'
+                sh 'scp -v -r logcleaning ubuntu@52.62.246.235:/home/ubuntu'
                 }
             }
         }
@@ -22,7 +19,7 @@ pipeline {
             steps {
                 echo 'Configuring the timming service on the targeted server ...'
                 sshagent(credentials: ['logclean']) {
-                sh 'ssh -o StrictHostKeyChecking=no ubuntu@52.62.246.235 pwd'
+                sh 'ssh -o StrictHostKeyChecking=no ubuntu@52.62.246.235 crontab ./logcleaning/crontab.config'
                 sh 'scp crontab ubuntu@52.62.246.235:/tmp/crontab.isn8ic'
                 }
             }
