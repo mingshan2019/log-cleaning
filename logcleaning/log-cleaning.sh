@@ -1,6 +1,6 @@
 #!/bin/bash
 
-logPath=~/jrkeystone/logs
+logPath=/home/ubuntu/jrkeystone/logs
 
 target_logs=`find ${logpath} -name "*.log.*" -mtime +7`
 disk_usage=$(df -h|grep "/$"|awk '{print int($5)}')
