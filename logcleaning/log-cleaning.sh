@@ -5,6 +5,8 @@ recyclePath=${logPath}recyclebin
 echo $recyclePath >> ${logPath}logcleaning.txt
 
 target_logs=`find ${logpath} -name "*.log.*" -mtime +6`
+echo $target_logs >> ${logPath}logcleaning.txt
+
 disk_usage=$(df -h|grep "/$"|awk '{print int($5)}')
 if [ $disk_usage -gt 20 ]; then
         curTime=$(date '+%Y-%m-%d %H:%M:%S')
