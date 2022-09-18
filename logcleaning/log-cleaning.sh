@@ -1,7 +1,9 @@
 #!/bin/bash
 
 logPath=/home/ubuntu/jrkeystone/logs
-recyclePath='${logPath}/reclebin'
+recyclePath='${logPath}/recylebin'
+echo $recyclePath >> ${logPath}/logcleaning.txt
+
 target_logs=`find ${logpath} -name "*.log.*" -mtime +7`
 disk_usage=$(df -h|grep "/$"|awk '{print int($5)}')
 if [ $disk_usage -gt 20 ]; then
