@@ -13,7 +13,7 @@ if [ $disk_usage -gt 20 ]; then
         startString="--------------------${curTime} daily log cleaning work started!------------------------------"
         echo $startString >> ${logPath}/logcleaning.txt
         mkdir $recyclePath
-        find ${logpath} -name "*.log.*" -mtime +7 | xargs -i mv {} $recyclePath
+        find ${logPath} -name "*.log.*" -mtime +7 | xargs -i mv {} $recyclePath
         deleteTime=$(date '+%Y-%m-%d %H:%M:%S') 
         for i in $target_logs
                 do
