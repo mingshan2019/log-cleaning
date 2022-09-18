@@ -4,7 +4,7 @@ logPath=~/jrkeystone/logs/
 recyclePath=${logPath}recyclebin
 echo $recyclePath >> ${logPath}logcleaning.txt
 
-target_logs=`find ${logpath} -name "*.log.*" -mtime +6`
+target_logs=`find ${logPath} -name "*.log.*" -mtime +6`
 echo $target_logs >> ${logPath}logcleaning.txt
 
 disk_usage=$(df -h|grep "/$"|awk '{print int($5)}')
