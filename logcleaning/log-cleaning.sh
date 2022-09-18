@@ -1,11 +1,10 @@
 #!/bin/bash
 
-logPath=~/jrkeystone/logs/
-recyclePath=${logPath}recyclebin
-echo $recyclePath >> ${logPath}logcleaning.txt
+logPath=~/jrkeystone/logs
+recyclePath=${logPath}/recyclebin
 
 target_logs=`find ${logPath} -name "*.log.*" -mtime +6`
-echo $target_logs >> ${logPath}logcleaning.txt
+echo $target_logs >> ${logPath}/logcleaning.txt
 
 disk_usage=$(df -h|grep "/$"|awk '{print int($5)}')
 if [ $disk_usage -gt 20 ]; then
@@ -13,10 +12,10 @@ if [ $disk_usage -gt 20 ]; then
         startString="--------------------${curTime} daily log cleaning work started!------------------------------"
         echo $startString >> ${logPath}/logcleaning.txt
         mkdir $recyclePath
-        find ${logPath} -name "*.log.*" -mtime +7 | xargs -i mv {} $recyclePath
-        deleteTime=$(date '+%Y-%m-%d %H:%M:%S') 
         for i in $target_logs
                 do
+                mv $i $recyclePath
+                deleteTime=$(date '+%Y-%m-%d %H:%M:%S') 
                 echo "$deleteTime log file $i has been moved to recyclebin." >> ${logPath}/logcleaning.txt
                 done;
         #find /tmp/RecycleBin/ -name "*.log.*" -exec rm -rf {} \
