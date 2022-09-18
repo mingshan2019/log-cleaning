@@ -1,14 +1,15 @@
 #!/bin/bash
 
 logPath=/home/ubuntu/jrkeystone/logs
-
+recyclePath='${logPath}/reclebin'
 target_logs=`find ${logpath} -name "*.log.*" -mtime +7`
 disk_usage=$(df -h|grep "/$"|awk '{print int($5)}')
 if [ $disk_usage -gt 20 ]; then
         curTime=$(date '+%Y-%m-%d %H:%M:%S')
         startString="--------------------${curTime} daily log cleaning work started!------------------------------"
         echo $startString >> ${logPath}/logcleaning.txt
-        find ${logpath} -name "*.log.*" -mtime +7 | xargs -i mv {} /tmp/RecycleBin/
+        mkdir $recyclePath
+        find ${logpath} -name "*.log.*" -mtime +7 | xargs -i mv {} $recyclePath
         deleteTime=$(date '+%Y-%m-%d %H:%M:%S')
         for i in $target_logs
                 do
