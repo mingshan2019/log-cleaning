@@ -1,6 +1,6 @@
 #!/bin/bash
 
-logPath=/home/ubuntu/jrkeystone/logs/
+logPath=~/jrkeystone/logs/
 recyclePath=${logPath}recyclebin
 echo $recyclePath >> ${logPath}logcleaning.txt
 
