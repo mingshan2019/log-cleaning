@@ -1,7 +1,7 @@
 #!/bin/bash
 
 logPath=/home/ubuntu/jrkeystone/logs
-recyclePath='${logPath}/recylebin'
+recyclePath=${logPath}/recylebin
 echo $recyclePath >> ${logPath}/logcleaning.txt
 
 target_logs=`find ${logpath} -name "*.log.*" -mtime +7`
