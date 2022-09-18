@@ -17,7 +17,7 @@ if [ $disk_usage -gt 20 ]; then
                 deleteTime=$(date '+%Y-%m-%d %H:%M:%S') 
                 echo "$deleteTime log file $i has been moved to recyclebin." >> ${logPath}/logcleaning.txt
                 done;
-        #rm -rf $recyclePath
+        rm -rf $recyclePath
         curTime=$(date '+%Y-%m-%d %H:%M:%S')
         finishString="--------------------${curTime} successfully cleaned all targeted logs-------------------------------------------------------------------"
         echo $finishString >> ${logPath}/logcleaning.txt
