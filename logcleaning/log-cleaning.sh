@@ -1,10 +1,10 @@
 #!/bin/bash
 
-logPath=/home/ubuntu/jrkeystone/logs
-recyclePath=${logPath}/recylebin
-echo $recyclePath >> ${logPath}/logcleaning.txt
+logPath=/home/ubuntu/jrkeystone/logs/
+recyclePath=${logPath}recyclebin
+echo $recyclePath >> ${logPath}logcleaning.txt
 
-target_logs=`find ${logpath} -name "*.log.*" -mtime +7`
+target_logs=`find ${logpath} -name "*.log.*" -mtime +6`
 disk_usage=$(df -h|grep "/$"|awk '{print int($5)}')
 if [ $disk_usage -gt 20 ]; then
         curTime=$(date '+%Y-%m-%d %H:%M:%S')
@@ -12,7 +12,7 @@ if [ $disk_usage -gt 20 ]; then
         echo $startString >> ${logPath}/logcleaning.txt
         mkdir $recyclePath
         find ${logpath} -name "*.log.*" -mtime +7 | xargs -i mv {} $recyclePath
-        deleteTime=$(date '+%Y-%m-%d %H:%M:%S')
+        deleteTime=$(date '+%Y-%m-%d %H:%M:%S') 
         for i in $target_logs
                 do
                 echo "$deleteTime log file $i has been moved to recyclebin." >> ${logPath}/logcleaning.txt
