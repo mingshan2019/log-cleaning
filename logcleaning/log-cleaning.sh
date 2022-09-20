@@ -3,10 +3,10 @@
 logPath=~/jrkeystone/logs
 recyclePath=${logPath}/recyclebin
 
-target_logs=`find ${logPath} -name "*.log*" -mtime +5`
+target_logs=`find ${logPath} -name "*.log*" -mtime +7`
 
 disk_usage=$(df -h|grep "/$"|awk '{print int($5)}')
-if [ $disk_usage -gt 20 ]; then
+if [ $disk_usage -gt 80 ]; then
         curTime=$(date '+%Y-%m-%d %H:%M:%S')
         startString="--------------------${curTime} daily log cleaning work started!--------------------------------------------------------------------------"
         echo $startString >> ${logPath}/logcleaning.txt
