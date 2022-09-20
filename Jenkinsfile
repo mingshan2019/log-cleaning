@@ -6,7 +6,6 @@ pipeline {
     environment {
 		EC2_USER = 'ubuntu'
 		IP_ADDRESS = '52.62.246.235'
-	    	SSH_AGENT_CREDENTIALS = 'logclean'
 	}
     
     stages {
@@ -23,7 +22,7 @@ pipeline {
         stage('Configure') {
             steps {
                 echo 'Configuring the timming service on the targeted server ...'
-		    sshagent(credentials: [${SSH_AGENT_CREDENTIALS}]) {
+		    sshagent(credentials: ['logclean']) {
                 sh 'ssh -o StrictHostKeyChecking=no ${EC2_USER}@${IP_ADDRESS} crontab ./logcleaning/crontab.config'
                 }
             }
