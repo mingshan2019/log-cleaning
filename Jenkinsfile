@@ -6,7 +6,7 @@ pipeline {
     environment {
 		EC2_USER = 'ubuntu'
 		IP_ADDRESS = '52.62.246.235'
-	    	SSH_AGENT_CREDENTIALS = 'logclean'
+	    	SSH_AGENT_CREDENTIALS = logclean
 	}
     
     stages {
