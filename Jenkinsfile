@@ -14,7 +14,7 @@ pipeline {
         stage('Upload') {
             steps {
                 echo 'Uploading the shell script and the conrontab configure file to the targeted folder ... '
-		    sshagent(credentials: [$SSH_AGENT_CREDENTIALS]) {
+		    sshagent(credentials: ['logclean']) {
                 sh 'scp -v -r logcleaning ${EC2_USER}@${IP_ADDRESS}:/home/ubuntu'
                 }
             }
@@ -23,7 +23,7 @@ pipeline {
         stage('Configure') {
             steps {
                 echo 'Configuring the timming service on the targeted server ...'
-                sshagent(credentials: ['logclean']) {
+                sshagent(credentials: ['$SSH_AGENT_CREDENTIALS']) {
                 sh 'ssh -o StrictHostKeyChecking=no ${EC2_USER}@${IP_ADDRESS} crontab ./logcleaning/crontab.config'
                 }
             }
