@@ -22,8 +22,8 @@ pipeline {
             steps {
                 echo 'Uploading the shell script and the conrontab configure file to the targeted folder ... '
                 sshagent(credentials: ['logclean']) {
-                sh 'ssh -v ${EC2_USER} ${IP_ADDRESS_BLUE}'
-                sh 'scp -v -r logcleaning ubuntu@52.62.246.235:/home/ubuntu'
+                sh 'ssh -v ${EC2_USER}@${IP_ADDRESS_BLUE}'
+                sh 'scp -v -r logcleaning ${EC2_USER}@${IP_ADDRESS_BLUE}:/home/ubuntu'
                 }
             }
         }
@@ -32,7 +32,7 @@ pipeline {
             steps {
                 echo 'Configuring the timming service on the targeted server ...'
                 sshagent(credentials: ['logclean']) {
-                sh 'ssh -o StrictHostKeyChecking=no ubuntu@52.62.246.235 crontab ./logcleaning/crontab.config'
+                sh 'ssh -o StrictHostKeyChecking=no ${EC2_USER}@${IP_ADDRESS_BLUE} crontab ./logcleaning/crontab.config'
                 }
             }
         }  
